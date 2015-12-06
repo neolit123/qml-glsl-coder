@@ -1,0 +1,5 @@
+deploy/
+Debug/
+Release/
+Makefile*
+fixwhite-all.cmd

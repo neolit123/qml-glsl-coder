@@ -1,0 +1,16 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+
+<qresource prefix="/">	
+	<file>../qml/Cursor.qml</file>
+	<file>../qml/Editor.qml</file>
+	<file>../qml/Dialogs.qml</file>
+	<file>../qml/FpsCounter.qml</file>
+	<file>../qml/main.qml</file>
+
+	<file>../js/Shader.js</file>
+
+	<file>../images/icon.png</file>
+</qresource>
+
+</RCC>

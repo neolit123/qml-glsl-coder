@@ -1,0 +1,125 @@
+QML GLSL Coder
+v1.0.0
+
+project URL:
+<TODO>
+
+--------------------------------------------------------------------------------
+INFORMATION
+
+"QML GLSL Coder" is a live editor of GLSL fragment shaders based on Qt / QML.
+
+the project is inspired by the following tools:
+- ShaderToy (by IQ)
+- Quint (by Andrew Baldwin)
+- GLSL-Sandbox (by various contributors)
+
+a couple of years ago i saw that easy, on-the-spot GLSL shader compilation was
+possible with Qt / QML in the Quint project, but it had some issues and was
+not very usable. in the meantime, i was playing with writing some effects in
+the other listed tools which are WebGL based.
+
+this project is not a port of Quint but rather a written from scratch, fully
+functional editor that i started writing a while back.
+
+public domain license - see the file LICENSE!
+
+--------------------------------------------------------------------------------
+SCREENSHOTS
+
+http://tinyurl.com/j6vh34l
+http://tinyurl.com/zztzymr
+http://tinyurl.com/zozwr68
+http://tinyurl.com/zozwr68
+
+--------------------------------------------------------------------------------
+WHAT WORKS
+
+only tested on Win32 desktop!
+press F1 for the help screen and a list of keyboard shortcuts.
+
+*) has a pretty usable text editor
+- the editor is defined in qml/Editor.qml
+- the editor can be toggled with F4
+- everything that QML's TextEdit has, this editor has as well
+- mouse wheel and page up/down support
+- shows the current line and compilation errors
+- has a syntax highlighter defined in cpp/highlighter.cpp/.h
+
+*) loading/saving .glsl files
+- F7/F8 open the file load/save dialogs
+
+*) loading of a single image that can be used as a texture
+- controlled with F6
+- see shaders/greyscaleTexture.glsl for an example
+
+*) dynamic quality and interpolation
+- controlled with F9, F10, F11
+
+*) toggleable FPS counter and mouse cursor
+- controlled with F2, F3
+
+*) fullscreen support
+- controlled with F12
+
+--------------------------------------------------------------------------------
+WHAT DOESN'T WORK (THAT WELL)
+
+here are some issues which are caused by Qt / QML bugs or missing features:
+
+*) Qt 5.5 has some sort of a bug in QQuickShaderEffect that prevents on-the-spot
+changes of the .fragmentShader property. this makes storing the last valid
+shader a bit difficult. to work around the issue the user needs to press F5
+- i.e. force recompile. the automatic recompilation is intentionally disabled.
+
+the bug makes the QML ShaderEffect object not reusable and a new one is
+created each time the shader is recompiled, while the old one is disposed.
+
+*) the layer which is the ShaderEffect strangly requires vertical flipping,
+which then makes the sampler2D coordinates of the texture in the vertex shader
+to require vertical flipping as well...this doesn't seem right because
+it inverts the coordinates of the texture.
+
+*) on Win32 the file open/save dialogs don't show in fullscreen unless the UI
+is clicked. to solve the issue the file dialogs are opened in window-mode
+and when closed, the original mode (e.g. fullscreen) is restored.
+
+*) for some reason, when the application window is open it makes certain
+tools on Win32 sluggish, while the CPU remains almost IDLE.
+
+*) lines with bold text have more height than lines without bold text, which
+breaks the estimation to fit exactly N lines of text in the editor visible
+area and the last line may be cut. QML's TextEdit has no easy means to set
+a fixed line height which is not very convenient.
+
+--------------------------------------------------------------------------------
+QMAKE VS CMAKE
+
+cmake is more potent, while qmake is easier for a fast project setup. period.
+this project is qmake based.
+
+hopefully qmake will not be deprecated soon.
+
+--------------------------------------------------------------------------------
+DEPLOYMENT SIZE
+
+40MB on Win32 is a bit too much but that's how Qt works.
+if i wrote the same in SDL and some sort of a simplified widgets toolkit
+it could have been in the lines of 10MB but it might have taken more time.
+
+--------------------------------------------------------------------------------
+BUILDING
+
+install the latest Qt version
+cd <path-where-the-coder-source-is>
+qmake
+make
+
+--------------------------------------------------------------------------------
+PRE-BUILD BINARIES
+
+qml-glsl-coder-1.0.0-win32-qt5.5.0.zip:
+http://tinyurl.com/h5arcp5
+
+--------------------------------------------------------------------------------
+EOF

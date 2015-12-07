@@ -9,7 +9,7 @@
 #include <QDebug>
 
 #ifndef BUILD_VERSION
-#define BUILD_VERSION "1.0.0"
+#define BUILD_VERSION "1.0.1"
 #endif
 
 #ifndef BUILD_NAME

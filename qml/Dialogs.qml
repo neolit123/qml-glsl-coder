@@ -14,7 +14,7 @@ Item {
 		helpDialog.visible = true;
 	}
 
-	readonly property string filterImage: "Image files (*.jpg *.jpeg *.gif *.png *.bmp *.tiff)";
+	readonly property string filterImage: "Image files (*.jpg *.jpeg *.gif *.png *.bmp *.tif *.tiff)";
 	readonly property string filterGLSL: "GLSL fragment shaders (*.glsl *.frag)";
 	property string currentFolder: "./";
 	property string currentFile: "";

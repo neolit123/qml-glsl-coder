@@ -236,8 +236,10 @@ QSGNode *ShaderItem::updatePaintNode(QSGNode *, UpdatePaintNodeData *)
 	if (m_dispose)
 		return NULL;
 
-	if (!m_SGNode)
+	if (!m_SGNode) {
 		m_SGNode = new QSGSimpleTextureNode();
+		m_SGNode->setTextureCoordinatesTransform(QSGSimpleTextureNode::MirrorVertically);
+	}
 
 	// render the item
 	paint();

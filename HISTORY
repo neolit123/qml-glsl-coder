@@ -1,5 +1,11 @@
+1.2.0 - 24.12.2015
+- build against Qt 5.5.1
+- replace ShaderEffect with ShaderItem (a custom QQuickItem based class)
+- make .frag the default extension for fragment shaders
+- rename all the bundled shaders to have the .frag extension
+
 1.0.1 - 07.12.2015
-added support for some more file extensions
+- added support for some more file extensions
 
 1.0.0 - 06.12.2015
-initial release
+- initial release

@@ -22,7 +22,7 @@ Window {
 		anchors.fill: parent
 
 		property real quality: 1.0;
-		property bool smooth: false;
+		property bool smooth: true;
 		property point mousePosition: Qt.point(0, 0);
 		property string defaultFont: "Courier New";
 
@@ -148,6 +148,9 @@ Window {
 		ShaderItem {
 			id: shaderItem
 			anchors.fill: parent;
+			smooth: main.smooth;
+			quality: main.quality;
+			fragmentShaderSource: main.defaultShader;
 
 			onLogChanged: {
 				if (shaderItem.log === "")
@@ -156,9 +159,9 @@ Window {
 					editor.setLogText(shaderItem.log, true);
 			}
 
-			smooth: main.smooth;
-			quality: main.quality;
-			fragmentShaderSource: main.defaultShader;
+			onSmoothChanged: {
+				print(shaderItem.smooth);
+			}
 		}
 
 		Cursor {

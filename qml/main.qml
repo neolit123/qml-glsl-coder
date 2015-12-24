@@ -21,20 +21,14 @@ Window {
 		id: main
 		anchors.fill: parent
 
-		readonly property int frameLength: 16;
-
-		property real quality: 2.0;
+		property real quality: 1.0;
 		property bool smoothing: false;
-		property size resolutionProp: Qt.size(main.width / quality, main.height / quality);
+		property size resolutionProp: Qt.size(main.width * quality, main.height * quality);
 		property point mouseProp: Qt.point(0, 0);
 		property string defaultFont: "Courier New";
-		property real timeProp: 0;
-		property real startTime: 0;
-		property var shaderEffect: null;
 
 		property string imageURL: "";
 		property string shaderEdit: "";
-		property string lastValidShader: ""
 		property string defaultShader: Shader.getDefault();
 
 		property var windowVisibility: ""
@@ -120,15 +114,15 @@ Window {
 				main.smoothing = !main.smoothing;
 				break;
 			case Qt.Key_F10:
-				tempQ *= 2.0;
-				if (tempQ > 16.0)
-					tempQ = 16.0;
+				tempQ *= 0.5;
+				if (tempQ < 0.0625)
+					tempQ = 0.0625;
 				quality = tempQ;
 				break;
 			case Qt.Key_F11:
-				tempQ *= 0.5;
-				if (tempQ < 0.25)
-					tempQ = 0.25;
+				tempQ *= 2.0;
+				if (tempQ > 2.0)
+					tempQ = 2.0;
 				quality = tempQ;
 				break;
 			case Qt.Key_F12:
@@ -152,19 +146,18 @@ Window {
 			id: dialogs;
 		}
 
-		/*
-		Image {
-			id: imageSource;
-			anchors.fill: parent;
-			source: main.imageURL;
-			// why the flipping here??
-			transform: Scale { xScale: 1; yScale: -1; origin.x: main.width / 2; origin.y: main.height / 2; }
-		}
-		*/
-
 		ShaderItem {
 			id: shaderItem
 			anchors.fill: parent;
+
+			onLogChanged: {
+				if (shaderItem.log === "")
+					editor.setLogText("Compiled " + (new Date()).toTimeString(), false);
+				else
+					editor.setLogText(shaderItem.log, true);
+			}
+
+			fragmentShaderSource: main.defaultShader;
 		}
 
 		Cursor {
@@ -180,30 +173,6 @@ Window {
 			x: parent.width - fpsCounter.width - 10;
 			visible: false
 			y: 25
-		}
-
-		/* a timer to update the 'time' property in the shader */
-		Timer {
-			id: fpsTimer
-			interval: main.frameLength;
-			running: true
-			repeat: true
-
-			onTriggered: {
-				main.timeProp = (Date.now() - main.startTime) / 1000;
-				/*
-				if (main.shaderEdit === editor.getText())
-					return;
-				main.shaderEdit = editor.getText();
-				main.renderShader();
-				*/
-			}
-
-			Component.onCompleted: {
-				main.startTime = Date.now();
-				main.shaderEdit = editor.getText();
-				main.renderShader();
-			}
 		}
 
 		/* a mouse area to catch movements */
@@ -243,39 +212,9 @@ Window {
 			onPressAndHold: mouse.accepted = false;
 		}
 
-		function checkErrors(activeObject) {
-			if (main.shaderEffect != activeObject)
-				return;
-			if (main.shaderEffect.status === ShaderEffect.Compiled) {
-				main.lastValidShader = main.shaderEffect.fragmentShader;
-				editor.setLogText("Compiled " + (new Date()).toTimeString(), false);
-				return;
-			}
-			if (main.shaderEffect.status === ShaderEffect.Error)
-				editor.setLogText(main.shaderEffect.log, true);
-		}
-
-		/* updating the .fragmentShader of a ShaderEffect desn't work, which makes
-		 * ShaderEffects non-reusable. to work around the issue we create a
-		 * new 'shaderEffect' instance on each text change */
 		function renderShader()
 		{
 			shaderItem.fragmentShaderSource = main.shaderEdit;
-			/*
-			var shaderEffectOld = shaderEffect;
-			var sh = Shader.getDefaultItem();
-			shaderEffect = Qt.createQmlObject(sh, imageSource, "shader");
-			var baseZ = shaderEffect.z;
-			editor.z = baseZ + 1;
-			cursor.z = baseZ + 2;
-			mouseArea.z = baseZ + 3;
-			fpsCounter.z = baseZ + 4;
-
-			if (shaderEffectOld != null) {
-				shaderEffectOld.visible = false
-				shaderEffectOld.destroy(main.frameLength / 2);
-			}
-			*/
 		}
 	}
 }

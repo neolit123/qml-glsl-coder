@@ -68,17 +68,14 @@ WHAT DOESN'T WORK (THAT WELL)
 here are some issues which are caused by Qt / QML bugs or missing features:
 
 *) Qt 5.5 has some sort of a bug in QQuickShaderEffect that prevents on-the-spot
-changes of the .fragmentShader property. this makes storing the last valid
-shader a bit difficult. to work around the issue the user needs to press F5
-- i.e. force recompile. the automatic recompilation is intentionally disabled.
+changes of the .fragmentShader property. this forced me to write a custom
+QQuickItem named ShaderItem which is a stripped down QQuickShaderEffect
+replacement.
 
-the bug makes the QML ShaderEffect object not reusable and a new one is
-created each time the shader is recompiled, while the old one is disposed.
-
-*) the layer which is the ShaderEffect strangly requires vertical flipping,
-which then makes the sampler2D coordinates of the texture in the vertex shader
-to require vertical flipping as well...this doesn't seem right because
-it inverts the coordinates of the texture.
+*) auto-compile-on-edit actually works quite well on the ShaderItem side,
+but the onTextChanged() signal from TextEdit is a bit sporadic.
+therefore, i have disabled auto-compile-on-edit and you have to press F5 to
+recompile. at some point this could become an option.
 
 *) on Win32 the file open/save dialogs don't show in fullscreen unless the UI
 is clicked. to solve the issue the file dialogs are opened in window-mode

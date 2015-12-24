@@ -158,10 +158,6 @@ Window {
 				else
 					editor.setLogText(shaderItem.log, true);
 			}
-
-			onSmoothChanged: {
-				print(shaderItem.smooth);
-			}
 		}
 
 		Cursor {

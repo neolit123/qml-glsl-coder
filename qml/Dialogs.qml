@@ -15,7 +15,7 @@ Item {
 	}
 
 	readonly property string filterImage: "Image files (*.jpg *.jpeg *.gif *.png *.bmp *.tif *.tiff)";
-	readonly property string filterGLSL: "GLSL fragment shaders (*.glsl *.frag)";
+	readonly property string filterGLSL: "GLSL fragment shaders (*.frag *.glsl)";
 	property string currentFolder: "./";
 	property string currentFile: "";
 	property string saveString: "";

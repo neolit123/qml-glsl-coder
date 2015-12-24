@@ -391,6 +391,7 @@ void ShaderItem::paintSetup()
 
 		// update the SG note texture from the framebuffer texture
 
+		m_SGNode->setFiltering(m_smooth ? QSGTexture::Linear : QSGTexture::Nearest);
 		setSGNodeTexture(m_renderTexture, m_sizeWidthQ, m_sizeHeightQ);
 	}
 

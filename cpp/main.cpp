@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 	app.setWindowIcon(QPixmap(":/images/icon.png"));
 	app.setApplicationName(BUILD_NAME);
 
-	REGISTER_QML_TYPES();
+	qmlRegisterType<Context>("MessageType", 1, 0, "MessageType");
 
 	Context context;
 	context.setBuildName(BUILD_NAME);

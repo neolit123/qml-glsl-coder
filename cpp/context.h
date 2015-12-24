@@ -3,9 +3,6 @@
 
 #include <QObject>
 
-#define REGISTER_QML_TYPES() \
-	qmlRegisterType<Context>("MessageType", 1, 0, "MessageType");
-
 class QQuickItem;
 class Highlighter;
 class QQuickTextDocument;

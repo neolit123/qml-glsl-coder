@@ -1,6 +1,7 @@
 import QtQuick 2.5
 import QtQuick.Window 2.2
 import MessageType 1.0
+import ShaderItem 1.0
 import "qrc:/js/Shader.js" as Shader
 
 Window {
@@ -62,7 +63,7 @@ Window {
 		function openImageFileCallback(url)
 		{
 			if (url != "") {
-				imageSource.source = url;
+				shaderEffect.imageSrouce = url;
 				print("image loaded: " + url);
 			}
 			restoreWindowVisibility();
@@ -151,12 +152,19 @@ Window {
 			id: dialogs;
 		}
 
+		/*
 		Image {
 			id: imageSource;
 			anchors.fill: parent;
 			source: main.imageURL;
 			// why the flipping here??
 			transform: Scale { xScale: 1; yScale: -1; origin.x: main.width / 2; origin.y: main.height / 2; }
+		}
+		*/
+
+		ShaderItem {
+			id: shaderItem
+			anchors.fill: parent;
 		}
 
 		Cursor {
@@ -252,6 +260,8 @@ Window {
 		 * new 'shaderEffect' instance on each text change */
 		function renderShader()
 		{
+			shaderItem.fragmentShaderSource = main.shaderEdit;
+			/*
 			var shaderEffectOld = shaderEffect;
 			var sh = Shader.getDefaultItem();
 			shaderEffect = Qt.createQmlObject(sh, imageSource, "shader");
@@ -265,6 +275,7 @@ Window {
 				shaderEffectOld.visible = false
 				shaderEffectOld.destroy(main.frameLength / 2);
 			}
+			*/
 		}
 	}
 }

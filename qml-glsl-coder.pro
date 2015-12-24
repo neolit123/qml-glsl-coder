@@ -10,10 +10,12 @@ RESOURCES += ./qrc/resources.qrc
 SOURCES += ./cpp/main.cpp \
 	./cpp/context.cpp \
 	./cpp/highlighter.cpp \
+	./cpp/shaderitem.cpp \
 
-HEADERS += \	
+HEADERS += \
 	./cpp/context.h \
 	./cpp/highlighter.h \
+	./cpp/shaderitem.h \
 
 DEPENDPATH += ./cpp ./qml ./js
 

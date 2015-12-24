@@ -23,8 +23,7 @@ Window {
 
 		property real quality: 1.0;
 		property bool smoothing: false;
-		property size resolutionProp: Qt.size(main.width * quality, main.height * quality);
-		property point mouseProp: Qt.point(0, 0);
+		property point mousePosition: Qt.point(0, 0);
 		property string defaultFont: "Courier New";
 
 		property string imageURL: "";
@@ -111,12 +110,12 @@ Window {
 				dialogs.saveFile(saveFileCallback, editor.getText());
 				break;
 			case Qt.Key_F9:
-				main.smoothing = !main.smoothing;
+				main.smooth = !main.smooth;
 				break;
 			case Qt.Key_F10:
 				tempQ *= 0.5;
-				if (tempQ < 0.0625)
-					tempQ = 0.0625;
+				if (tempQ < 0.015625)
+					tempQ = 0.015625;
 				quality = tempQ;
 				break;
 			case Qt.Key_F11:
@@ -157,6 +156,8 @@ Window {
 					editor.setLogText(shaderItem.log, true);
 			}
 
+			smooth: main.smooth;
+			quality: main.quality;
 			fragmentShaderSource: main.defaultShader;
 		}
 
@@ -184,8 +185,9 @@ Window {
 			preventStealing: false
 
 			onPositionChanged: {
-				main.mouseProp.x = mouse.x / main.width;
-				main.mouseProp.y = 1.0 - mouse.y / main.height;
+				main.mousePosition.x = mouse.x / main.width;
+				main.mousePosition.y = mouse.y / main.height;
+				shaderItem.mousePosition = main.mousePosition;
 				cursor.setPosition(mouse.x, mouse.y);
 			}
 

@@ -22,7 +22,7 @@ Window {
 		anchors.fill: parent
 
 		property real quality: 1.0;
-		property bool smoothing: false;
+		property bool smooth: false;
 		property point mousePosition: Qt.point(0, 0);
 		property string defaultFont: "Courier New";
 

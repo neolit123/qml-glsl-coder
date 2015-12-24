@@ -133,7 +133,7 @@ Item {
 		id: smoothText
 		font.family: defaultFont
 		color: colorGreen;
-		text: "| Smooth: " + main.smoothing;
+		text: "| Smooth: " + main.smooth;
 		renderType: Text.NativeRendering
 		y: parent.height - qualityText.height;
 		x: qualityText.x + qualityText.width + 10;

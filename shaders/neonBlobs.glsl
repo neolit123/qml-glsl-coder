@@ -1,9 +1,8 @@
-uniform sampler2D source;
-varying highp vec2 coord;
+uniform highp float time;
 uniform highp vec2 mouse;
 uniform highp vec2 resolution;
-uniform highp float time;
-uniform lowp float qt_Opacity;
+varying highp vec2 texCoord;
+uniform sampler2D texture;
 
 // shader taken from http://glslsandbox.com
 

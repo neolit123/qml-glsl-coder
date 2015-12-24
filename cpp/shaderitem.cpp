@@ -436,10 +436,10 @@ void ShaderItem::paint()
 	};
 
 	static const GLfloat coordTex[] = {
-		0.f, 1.f,
-	    1.f, 1.f,
 	    0.f, 0.f,
-	    1.f, 0.f
+	    1.f, 0.f,
+	    0.f, 1.f,
+	    1.f, 1.f
 	};
 
 	m_program->setAttributeArray(PROGRAM_VERTEX_ATTRIBUTE, GL_FLOAT, coordVert, 2);

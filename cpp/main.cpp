@@ -17,6 +17,7 @@
 #endif
 
 #include "cpp/context.h"
+#include "cpp/shaderitem.h"
 
 int main(int argc, char **argv)
 {
@@ -25,6 +26,7 @@ int main(int argc, char **argv)
 	app.setApplicationName(BUILD_NAME);
 
 	qmlRegisterType<Context>("MessageType", 1, 0, "MessageType");
+	qmlRegisterType<ShaderItem>("ShaderItem", 1, 0, "ShaderItem");
 
 	Context context;
 	context.setBuildName(BUILD_NAME);

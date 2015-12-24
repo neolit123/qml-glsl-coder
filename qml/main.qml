@@ -56,7 +56,7 @@ Window {
 		function openImageFileCallback(url)
 		{
 			if (url != "") {
-				shaderEffect.imageSrouce = url;
+				shaderItem.imageSource = url;
 				print("image loaded: " + url);
 			}
 			restoreWindowVisibility();

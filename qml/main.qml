@@ -160,12 +160,12 @@ Window {
 			}
 		}
 
-		Cursor {
-			id: cursor;
-		}
-
 		Editor {
 			id: editor;
+		}
+
+		Cursor {
+			id: cursor;
 		}
 
 		FpsCounter {

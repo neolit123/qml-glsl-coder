@@ -185,7 +185,7 @@ Window {
 
 			onPositionChanged: {
 				main.mousePosition.x = mouse.x / main.width;
-				main.mousePosition.y = mouse.y / main.height;
+				main.mousePosition.y = 1.0 - mouse.y / main.height;
 				shaderItem.mousePosition = main.mousePosition;
 				cursor.setPosition(mouse.x, mouse.y);
 			}
